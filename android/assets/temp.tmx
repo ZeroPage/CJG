@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="128" tileheight="128" nextobjectid="1">
- <tileset firstgid="1" name="temp" tilewidth="128" tileheight="128">
-  <image source="Users/JM/Desktop/맵 타일/임시맵.png" width="2560" height="2560"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="64" nextobjectid="1">
+ <tileset firstgid="1" name="tempmap" tilewidth="64" tileheight="64">
+  <image source="maptile/tempmap.png" width="1280" height="1280"/>
  </tileset>
  <layer name="Tile Layer 1" width="20" height="20">
   <data encoding="base64" compression="zlib">

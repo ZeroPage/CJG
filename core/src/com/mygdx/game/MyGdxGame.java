@@ -1,113 +1,142 @@
 package com.mygdx.game;
-
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class MyGdxGame implements ApplicationListener {
-
-    static final int WORLD_WIDTH = 100;
-    static final int WORLD_HEIGHT = 100;
-
-    private OrthographicCamera cam;
-    private SpriteBatch batch;
-
-    private Sprite mapSprite;
-    private float rotationSpeed;
-    TiledMap tilemap;
-
+public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
+    Texture img;
+    TiledMap tiledMap;
+    ShapeRenderer shapeRenderer;
+    OrthographicCamera camera;
+    TiledMapTileLayer mapLayer;
+    TiledMapRenderer tiledMapRenderer;
+    static final int oneblock = 64;
+    static final int max_x=19, max_y = 19;
+    static int cur_x=0, cur_y=0;
+    
+    public void testing () {
+       mapLayer.setCell(cur_x, cur_y,mapLayer.getCell(0,19));
+    }
+    
+    void cursor(){
+       shapeRenderer.begin(ShapeType.Line);
+       shapeRenderer.identity();
+       shapeRenderer.translate(20,12,2);
+       shapeRenderer.rotate(0, 0, 1, 90);
+       shapeRenderer.rect(-oneblock/2, -oneblock/2, oneblock, oneblock);
+       shapeRenderer.end();
+    }
+    
     @Override
-    public void create() {
-    	
-    	tilemap = new TmxMapLoader().load("temp.tmx");
-    	
-        rotationSpeed = 0.5f;
-
-        mapSprite = new Sprite(new Texture(Gdx.files.internal("test_map.jpg")));
-        mapSprite.setPosition(0, 0);
-        mapSprite.setSize(WORLD_WIDTH, WORLD_HEIGHT); 
-        
+    public void create () {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        cam = new OrthographicCamera(30, 30 * (h / w));
-        cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
-        cam.update();
-
-        batch = new SpriteBatch();
         
         
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false,w,h);
+        camera.update();
+        tiledMap = new TmxMapLoader().load("temp.tmx");
+        mapLayer=(TiledMapTileLayer)tiledMap.getLayers().get(0);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
-    public void render() {
-        handleInput();
-        cam.update();
-        batch.setProjectionMatrix(cam.combined);
-
+    public void render () {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        batch.begin();
-        mapSprite.draw(batch);
-        batch.end();
-    }
-
-    private void handleInput() {
-    	//zoom in
-        //if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-        //    cam.zoom += 0.02;
-        //}
-    	//zoom out
-        //if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-        //   cam.zoom -= 0.02;
-        //}
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            cam.translate(-2, 0, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            cam.translate(2, 0, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            cam.translate(0, -2, 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            cam.translate(0, 2, 0);
-        }
-
+        tiledMapRenderer.setView(camera);
+        tiledMapRenderer.render();
+        camera.update();
         
-        //boundary
-        cam.zoom = MathUtils.clamp(cam.zoom, 0.1f, 100/cam.viewportWidth);
-        float effectiveViewportWidth = cam.viewportWidth * cam.zoom;
-        float effectiveViewportHeight = cam.viewportHeight * cam.zoom;
-        cam.position.x = MathUtils.clamp(cam.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
-        cam.position.y = MathUtils.clamp(cam.position.y, effectiveViewportHeight / 2f, 100 - effectiveViewportHeight / 2f);
-
     }
 
     @Override
-    public void resize(int width, int height) {
-        cam.viewportWidth = 30f;
-        cam.viewportHeight = 30f * height/width;
-        cam.update();
+    public boolean keyDown(int keycode) {
+        return false;
     }
 
     @Override
-    public void resume() {
+    public boolean keyUp(int keycode) {
+        if(keycode == Input.Keys.LEFT){
+           if(cur_x>0){
+              camera.translate(-oneblock,0);
+              cur_x--;
+           }
+        }
+        if(keycode == Input.Keys.RIGHT){
+           if(cur_x<max_x){
+              camera.translate(oneblock,0);
+              cur_x++;
+           }
+        }
+        if(keycode == Input.Keys.UP){
+           if(cur_y<max_y){
+              camera.translate(0,oneblock);
+              cur_y++;
+           }
+        }
+        if(keycode == Input.Keys.DOWN){
+           if(cur_y>0){
+              camera.translate(0,-oneblock);
+              cur_y--;
+           }
+        }
+        if(keycode == Input.Keys.SPACE)
+           testing();
+        if(keycode == Input.Keys.NUM_1)
+            tiledMap.getLayers().get(0).setVisible(!tiledMap.getLayers().get(0).isVisible());
+        if(keycode == Input.Keys.NUM_2)
+            tiledMap.getLayers().get(1).setVisible(!tiledMap.getLayers().get(1).isVisible());
+        return false;
     }
 
     @Override
-    public void dispose() {
-        mapSprite.getTexture().dispose();
-        batch.dispose();
+    public boolean keyTyped(char character) {
+
+        return false;
     }
 
     @Override
-    public void pause() {
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 }
