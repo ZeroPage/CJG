@@ -12,7 +12,7 @@ public abstract class Unit {
 	Point point;
 	Texture img;
 	Direction movDir;
-	Batch batch;
+	SpriteBatch batch;
 	Pixel[][] map;
 	Unit(SpriteBatch batch, Pixel[][] map){
 		this.batch = batch;
