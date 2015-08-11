@@ -3,6 +3,8 @@ package com.mygdx.game;
 import java.awt.Point;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sun.javafx.scene.traversal.Direction;
 
 public abstract class Unit {
@@ -10,7 +12,11 @@ public abstract class Unit {
 	Point point;
 	Texture img;
 	Direction movDir;
-	Unit(){
+	Batch batch;
+	Pixel[][] map;
+	Unit(SpriteBatch batch, Pixel[][] map){
+		this.batch = batch;
+		this.map = map;
 		
 	}
 	abstract void render();
