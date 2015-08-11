@@ -17,6 +17,7 @@ public abstract class Unit {
 	Unit(SpriteBatch batch, Pixel[][] map){
 		this.batch = batch;
 		this.map = map;
+		point = new Point();
 		
 	}
 	abstract void render();
