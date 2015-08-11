@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sun.javafx.scene.traversal.Direction;
 
 abstract class Monster extends Unit{
 	Monster(SpriteBatch batch, Pixel[][] map, int x, int y){
@@ -19,6 +20,7 @@ class Moss extends Monster{
 		this.ad = 1;
 		this.df = 0;
 		this.img = new Texture("moss.jpg");
+		this.movDir = Direction.RIGHT;
 	}
 
 	@Override
