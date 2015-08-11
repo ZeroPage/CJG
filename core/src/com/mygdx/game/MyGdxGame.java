@@ -153,7 +153,6 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         int x = cur_x + screenX/oneblock, y = cur_y + (Gdx.graphics.getHeight()-screenY)/oneblock;
 
-        System.out.println(x + " " + y);
 
         /*
         if(canDig(x,y)){
@@ -167,11 +166,10 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
             }
         }*/
 
+
         mapLayer.setCell(x, y, cell);
-
-
-        if(!map[x][y].digged){
-            Moss newMob = new Moss(spriteBatch, map, x, y);
+        if(!map[x][y].digged && map[x][y].underground){
+        	Moss newMob = new Moss(spriteBatch, map, x, y);
             unitArrayList.add(newMob);
             map[x][y].digged = true;
         }
