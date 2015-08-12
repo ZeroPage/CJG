@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.sun.javafx.scene.traversal.Direction;
 
 public abstract class Unit {
+	final int ONE_BLOCK = 32;
 	int hp,ad,df,mr;	//mr == magic resist
 	Point point;
 	Texture img;

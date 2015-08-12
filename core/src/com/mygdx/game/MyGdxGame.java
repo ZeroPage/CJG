@@ -169,7 +169,9 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
         mapLayer.setCell(x, y, cell);
         if(!map[x][y].digged && map[x][y].underground){
-        	Moss newMob = new Moss(spriteBatch, map, x, y);
+        	Monster newMob;
+        	if(y%2 == 0 || x != 5) newMob = new Moss(spriteBatch, map, x, y);
+        	else newMob = new Dragon(spriteBatch, map, x, y);
             unitArrayList.add(newMob);
             map[x][y].digged = true;
         }
