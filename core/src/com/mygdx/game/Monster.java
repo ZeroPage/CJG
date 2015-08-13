@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.awt.Point;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -54,6 +56,11 @@ class Moss extends Monster{
 		int whileNum = 0;
 		//this version, it just move, cannot attack
 		while(!temp && whileNum < 4){
+			if(!isInMap(nextMoveX(), nextMoveY())){
+				changeDir();
+				whileNum++;
+				continue;
+			}
 			temp = map[nextMoveX()][nextMoveY()].digged;
 			if(map[nextMoveX()][nextMoveY()].digged){
 				point.x = nextMoveX();
@@ -123,6 +130,11 @@ class Dragon extends Monster{
 		int whileNum = 0;
 		//this version, it just move, cannot attack
 		while(!temp && whileNum < 2){
+			if(!isInMap(nextMoveX(), nextMoveY())){
+				changeDir();
+				whileNum++;
+				continue;
+			}
 			temp = map[nextMoveX()][nextMoveY()].digged;
 			if(!map[nextMoveX()][nextMoveY()].PlacedUnit.isEmpty()){
 				return false; //attack!!
