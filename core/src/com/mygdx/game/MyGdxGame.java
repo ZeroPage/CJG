@@ -174,6 +174,7 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
         	else newMob = new Dragon(spriteBatch, map, x, y);
             unitArrayList.add(newMob);
             map[x][y].digged = true;
+            map[x][y].PlacedUnit.add(newMob);
         }
 
         return false;

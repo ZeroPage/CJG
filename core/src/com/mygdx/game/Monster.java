@@ -63,8 +63,10 @@ class Moss extends Monster{
 			}
 			temp = map[nextMoveX()][nextMoveY()].digged;
 			if(map[nextMoveX()][nextMoveY()].digged){
+				map[point.x][point.y].PlacedUnit.remove(this);
 				point.x = nextMoveX();
 				point.y = nextMoveY();
+				map[point.x][point.y].PlacedUnit.add(this);
 			}
 			else changeDir();
 			whileNum++;
@@ -140,12 +142,15 @@ class Dragon extends Monster{
 				return false; //attack!!
 			}
 			else if(map[nextMoveX()][nextMoveY()].digged){
+				map[point.x][point.y].PlacedUnit.remove(this);
 				point.x = nextMoveX();
 				point.y = nextMoveY();
+				map[point.x][point.y].PlacedUnit.add(this);
 			}
 			else changeDir();
 			whileNum++;
 		}
+		//for debug
 		return true;
 	}
 	@Override

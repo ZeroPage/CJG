@@ -10,7 +10,7 @@ import com.sun.javafx.scene.traversal.Direction;
 public abstract class Unit {
 	final int ONE_BLOCK = 32;
 	final int MAX_MAP_INDEX_X = 29;
-	final int MAX_MAP_INDEX_Y = 25;
+	final int MAX_MAP_INDEX_Y = 26;
 	int hp,ad,df,mr;	//mr == magic resist
 	Point point;
 	Texture img;
