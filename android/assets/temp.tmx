@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32">
-  <image source="maptile/tileset.png" width="160" height="32"/>
+  <image source="maptile/tileset.png" width="256" height="32"/>
   <tile id="0">
    <properties>
     <property name="ground" value=""/>
@@ -12,12 +12,14 @@
    <properties>
     <property name="blocked" value=""/>
     <property name="ground" value=""/>
+    <property name="nutrient" value="1"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
     <property name="blocked" value=""/>
     <property name="ground" value=""/>
+    <property name="nutrient" value="1"/>
    </properties>
   </tile>
   <tile id="3">
@@ -29,21 +31,38 @@
   <tile id="4">
    <properties>
     <property name="blocked" value=""/>
+    <property name="nutrient" value="0"/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="nutrient" value="1"/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="nutrient" value="2"/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="nutrient" value="3"/>
     <property name="underground" value=""/>
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="6" name="tree1" tilewidth="32" tileheight="32">
+ <tileset firstgid="9" name="tree1" tilewidth="32" tileheight="32">
   <image source="maptile/tree1.png" width="512" height="512"/>
  </tileset>
- <layer name="Tile Layer 2" width="30" height="30">
+ <layer name="Tile Layer 1" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBh5IByIywjws5H4WUTIE+KPglEwCkbBKBgFo2AUjIJRMApGwWADAFoCBhM=
-  </data>
- </layer>
- <layer name="Tile Layer 1" width="30" height="30" opacity="0.9">
-  <data encoding="base64" compression="zlib">
-   eJztx7sNgDAQwNBTUPbvAlkgkAX4bIcXoD0aF0+WW0Ss2NDRkn5gx4GZ+Ccu3HgSv2D5oVWSJEmSPrztr0pl
+   eJybycDAMAuIZwPxHCCeSSf+SiBeBcSrgXgNHfk7gXgXEO8G4j105DMBMfMA0KyjeBSPYjhmR+Oz0dGugbCDjQS1o5h4TEy6oWXaGmg81NMSxyDx31BKI0PJreTE+VDB6PEwXPw1igcuTmHlHQCskEuU
   </data>
  </layer>
 </map>
