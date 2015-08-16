@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import java.awt.Point;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -56,17 +55,10 @@ class Moss extends Monster{
 		int whileNum = 0;
 		//this version, it just move, cannot attack
 		while(!temp && whileNum < 4){
-			if(!isInMap(nextMoveX(), nextMoveY())){
-				changeDir();
-				whileNum++;
-				continue;
-			}
 			temp = map[nextMoveX()][nextMoveY()].digged;
 			if(map[nextMoveX()][nextMoveY()].digged){
-				map[point.x][point.y].PlacedUnit.remove(this);
 				point.x = nextMoveX();
 				point.y = nextMoveY();
-				map[point.x][point.y].PlacedUnit.add(this);
 			}
 			else changeDir();
 			whileNum++;
@@ -132,25 +124,17 @@ class Dragon extends Monster{
 		int whileNum = 0;
 		//this version, it just move, cannot attack
 		while(!temp && whileNum < 2){
-			if(!isInMap(nextMoveX(), nextMoveY())){
-				changeDir();
-				whileNum++;
-				continue;
-			}
 			temp = map[nextMoveX()][nextMoveY()].digged;
 			if(!map[nextMoveX()][nextMoveY()].PlacedUnit.isEmpty()){
 				return false; //attack!!
 			}
 			else if(map[nextMoveX()][nextMoveY()].digged){
-				map[point.x][point.y].PlacedUnit.remove(this);
 				point.x = nextMoveX();
 				point.y = nextMoveY();
-				map[point.x][point.y].PlacedUnit.add(this);
 			}
 			else changeDir();
 			whileNum++;
 		}
-		//for debug
 		return true;
 	}
 	@Override

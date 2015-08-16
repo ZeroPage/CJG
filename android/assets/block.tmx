@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="ground_digged" tilewidth="32" tileheight="32">
-  <image source="maptile/ground_digged.png" width="64" height="64"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="8" height="1" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32">
+  <image source="maptile/tileset.png" width="256" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="ground" value=""/>
+    <property name="unblocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="ground" value=""/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="ground" value=""/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="unblocked" value=""/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="nutrient" value="0"/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="nutrient" value="1"/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="nutrient" value="2"/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="blocked" value=""/>
+    <property name="nutrient" value="3"/>
+    <property name="underground" value=""/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="Tile Layer 1" width="1" height="1">
+ <layer name="Tile Layer 1" width="8" height="1">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgAAAAFAAF
+   eJxjZGBgYAJiZiBmAWJWIGYDYnYg5gBiAAIAACU=
   </data>
  </layer>
 </map>
