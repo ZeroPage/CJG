@@ -29,13 +29,22 @@ public class Tilemap {
 	boolean digging (int x, int y) {
 		MapProperties curPro = mapLayer.getCell(x, y).getTile().getProperties();
 		
-		if(curPro.containsKey("blocked")){        	       
-            mapLayer.setCell(x, y, blockLayer.getCell(3,0)); 
-            
-            return true;
-        }
-		else
+		if(curPro.containsKey("ground")){
 			return false;
+		}
+		
+		else{
+			if(curPro.containsKey("blocked")){        	       
+				if(checkDigged(x-1,y)||checkDigged(x+1,y)||checkDigged(x,y-1)||checkDigged(x,y+1)){
+					mapLayer.setCell(x, y, blockLayer.getCell(3,0)); 
+					return true;
+				}
+				else 
+					return false;
+        	}
+			else
+			return false;
+		}
 	}
 	
 	void nutriDiffusion(int x, int y) {
@@ -65,5 +74,19 @@ public class Tilemap {
 			
 		}
 	}
-	
+	boolean checkDigged(int x, int y){
+		MapProperties curPro = mapLayer.getCell(x,y).getTile().getProperties();
+		
+		if (x<0||x>29||y<0||y>26){
+			System.out.println("out of map");
+			return false;
+		}
+		
+		if (curPro.containsKey("unblocked"))
+			return true;
+		else{
+			System.out.println(x + ", " + y + " is blocked");
+			return false;
+		}
+	}
 }

@@ -45,8 +45,6 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
                 map[i][j].nutrient = 1;
             }
         }
-        map[2][4].digged = true;
-
         
         
         unitArrayList = new ArrayList<Unit>();
